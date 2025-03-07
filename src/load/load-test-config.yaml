@@ -1,0 +1,10 @@
+version: v0.1
+testId: azref-load-test
+testPlan: azref-load-script.jmx
+testType: JMX
+engineInstances: 1
+env:
+  - name: AFD_HOST
+    value: ##AFD_HOST##
+  - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+    value: ##APP_INSIGHTS_CONNECTION##

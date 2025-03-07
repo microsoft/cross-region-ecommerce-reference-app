@@ -1,0 +1,1671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.2">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="AzReferenceApplication" enabled="true">
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <BackendListener guiclass="BackendListenerGui" testclass="BackendListener" testname="Backend Listener" enabled="true">
+        <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="testName" elementType="Argument">
+              <stringProp name="Argument.name">testName</stringProp>
+              <stringProp name="Argument.value">azrefapp</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="samplersList" elementType="Argument">
+              <stringProp name="Argument.name">samplersList</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="useRegexForSamplerList" elementType="Argument">
+              <stringProp name="Argument.name">useRegexForSamplerList</stringProp>
+              <stringProp name="Argument.value">false</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="logResponseData" elementType="Argument">
+              <stringProp name="Argument.name">logResponseData</stringProp>
+              <stringProp name="Argument.value">Always</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="logSampleData" elementType="Argument">
+              <stringProp name="Argument.name">logSampleData</stringProp>
+              <stringProp name="Argument.value">OnFailure</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="responseHeaders" elementType="Argument">
+              <stringProp name="Argument.name">responseHeaders</stringProp>
+              <stringProp name="Argument.value">AZREF_NODE_NAME;AZREF_APPGW_IP</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </elementProp>
+        <stringProp name="classname">com.microsoft.azure.refapp.backendlistener.AzureBackendClient</stringProp>
+      </BackendListener>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="AZRefAppEcommerceScenario" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <intProp name="LoopController.loops">-1</intProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy( System.getenv(&quot;NUMBER_OF_USERS&quot;) ?: &quot;100&quot; )}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__groovy(System.getenv(&quot;MAX_RUN_TIME_SEC&quot;) ?: &quot;1800&quot;)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__groovy(System.getenv(&quot;STARTUP_DELAY&quot;) ?: &quot;0&quot;)}</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+          <collectionProp name="UserParameters.names">
+            <stringProp name="1525798729">AZREF_SESSION_ID</stringProp>
+            <stringProp name="-1752163738">UserId</stringProp>
+            <stringProp name="-119706792">ItemsSent</stringProp>
+            <stringProp name="1816706846">HOST_IP</stringProp>
+            <stringProp name="870516780">AppName</stringProp>
+            <stringProp name="-1077362389">MAX_RETRIES</stringProp>
+            <stringProp name="820811661">ITEMS_PER_ORDER</stringProp>
+            <stringProp name="-417975029">RETRY_FLAG_GET_UPCOMING_CONCERTS</stringProp>
+            <stringProp name="315643649">RETRY_FLAG_GET_CONCERT</stringProp>
+            <stringProp name="-1111232078">RETRY_FLAG_CREATE_USER</stringProp>
+            <stringProp name="1569840432">RETRY_FLAG_GET_USER</stringProp>
+            <stringProp name="-518179542">RETRY_FLAG_ADD_TO_CART</stringProp>
+            <stringProp name="-1175480612">RETRY_FLAG_GET_AND_VALIDATE_CART</stringProp>
+            <stringProp name="-94028249">RETRY_FLAG_CREATE_ORDER</stringProp>
+            <stringProp name="910396170">RETRY_FLAG_GET_ORDERS</stringProp>
+            <stringProp name="1741119765">HTTP_CONNECT_TIMEOUT</stringProp>
+            <stringProp name="1643616560">GET_UPCOMING_CONCERTS_ERROR</stringProp>
+            <stringProp name="-806693466">GET_CONCERT_ERROR</stringProp>
+            <stringProp name="1265756055">CREATE_USER_ERROR</stringProp>
+            <stringProp name="2064523549">GET_USER_ERROR</stringProp>
+            <stringProp name="-713510641">ADD_TO_CART_ERROR</stringProp>
+            <stringProp name="1517984321">GET_AND_VALIDATE_CART_ERROR</stringProp>
+            <stringProp name="1382517460">CREATE_ORDER_ERROR</stringProp>
+            <stringProp name="1691996791">GET_ORDERS_ERROR</stringProp>
+            <stringProp name="2144620928">RETRY_CONSTANT_DELAY_SQL_SEC</stringProp>
+            <stringProp name="-1669134675">RETRY_CONSTANT_DELAY_REDIS_SEC</stringProp>
+            <stringProp name="570880527">USER_ID</stringProp>
+            <stringProp name="-1449291404">CONCERT_ID</stringProp>
+            <stringProp name="-1978360481">CONCERT_IDS</stringProp>
+            <stringProp name="2016962508">ORDER_ID</stringProp>
+            <stringProp name="-2132484959">NumTickets</stringProp>
+            <stringProp name="-671496828">ADDITIONAL_LOGGING_FLAG</stringProp>
+          </collectionProp>
+          <collectionProp name="UserParameters.thread_values">
+            <collectionProp name="329568196">
+              <stringProp name="118040362">${__UUID()}</stringProp>
+              <stringProp name="118040362">${__UUID()}</stringProp>
+              <stringProp name="0"></stringProp>
+              <stringProp name="421193714">${__groovy( System.getenv(&quot;AFD_HOST&quot;) )}</stringProp>
+              <stringProp name="-1966521817">AZRefApp</stringProp>
+              <stringProp name="51">3</stringProp>
+              <stringProp name="53">5</stringProp>
+              <stringProp name="84">T</stringProp>
+              <stringProp name="84">T</stringProp>
+              <stringProp name="84">T</stringProp>
+              <stringProp name="84">T</stringProp>
+              <stringProp name="84">T</stringProp>
+              <stringProp name="84">T</stringProp>
+              <stringProp name="84">T</stringProp>
+              <stringProp name="84">T</stringProp>
+              <stringProp name="46730161">600</stringProp>
+              <stringProp name="2583950">TRUE</stringProp>
+              <stringProp name="2583950">TRUE</stringProp>
+              <stringProp name="2583950">TRUE</stringProp>
+              <stringProp name="2583950">TRUE</stringProp>
+              <stringProp name="35394935">PENDING</stringProp>
+              <stringProp name="2583950">TRUE</stringProp>
+              <stringProp name="2583950">TRUE</stringProp>
+              <stringProp name="2583950">TRUE</stringProp>
+              <stringProp name="49">1</stringProp>
+              <stringProp name="49">1</stringProp>
+              <stringProp name="76480">N/A</stringProp>
+              <stringProp name="76480">N/A</stringProp>
+              <stringProp name="76480">N/A</stringProp>
+              <stringProp name="76480">N/A</stringProp>
+              <stringProp name="48">0</stringProp>
+              <stringProp name="1485119632">${__groovy( System.getenv(&quot;ADDITIONAL_LOGGING_FLAG&quot;) ?: &quot;FALSE&quot; )}</stringProp>
+            </collectionProp>
+          </collectionProp>
+          <boolProp name="UserParameters.per_iteration">true</boolProp>
+        </UserParameters>
+        <hashTree/>
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="true">
+          <doubleProp>
+            <name>throughput</name>
+            <value>3000.0</value>
+            <savedValue>0.0</savedValue>
+          </doubleProp>
+          <intProp name="calcMode">2</intProp>
+        </ConstantThroughputTimer>
+        <hashTree/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller - HealthCheck" enabled="true"/>
+        <hashTree>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="-98944848">AZREF_REQUEST_ID</stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="681405977">
+                <stringProp name="118040362">${__UUID()}</stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">true</boolProp>
+          </UserParameters>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Request_Healthcheck" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${HOST_IP}</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.path">/api/live</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+            <boolProp name="HTTPSampler.image_parser">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <boolProp name="HTTPSampler.md5">false</boolProp>
+            <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout">${HTTP_CONNECT_TIMEOUT}</stringProp>
+            <stringProp name="HTTPSampler.response_timeout">600</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Healthcheck PostProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.samplers.SampleResult
+import groovy.json.JsonBuilder
+
+def jsonObject = new JsonBuilder([
+    sessionId: vars.get(&quot;AZREF_SESSION_ID&quot;),
+    requestId: vars.get(&quot;AZREF_REQUEST_ID&quot;)
+])
+
+if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+    log.info(&quot;Request_Healthcheck response code: &quot; + prev.getResponseCode().toString())
+    log.info(&quot;Request_Healthcheck custom response data: &quot; + jsonObject.toPrettyString())
+}
+
+prev.setResponseData(jsonObject.toPrettyString().getBytes())
+prev.setDataType(SampleResult.TEXT)
+</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller - Get Upcoming Concerts" enabled="true"/>
+        <hashTree>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="-824548920">REF_REQ_ID</stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="681405977">
+                <stringProp name="118040362">${__UUID()}</stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">true</boolProp>
+          </UserParameters>
+          <hashTree/>
+          <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller - Get Upcoming Concerts" enabled="true">
+            <stringProp name="WhileController.condition">${__groovy(vars.get(&quot;RETRY_FLAG_GET_UPCOMING_CONCERTS&quot;).equals(&quot;T&quot;) ,)}</stringProp>
+          </WhileController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Request_GetUpcomingConcerts" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${HOST_IP}</stringProp>
+              <stringProp name="HTTPSampler.port">443</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">/api/concerts?take=10&amp;AZREF_SESSION_ID=${AZREF_SESSION_ID}&amp;AZREF_REQUEST_ID=${AZREF_REQUEST_ID}&amp;AZREF_RETRY_COUNT=${retryGetUpcomingConcerts}</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">${HTTP_CONNECT_TIMEOUT}</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">600</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+                <collectionProp name="UserParameters.names">
+                  <stringProp name="-98944848">AZREF_REQUEST_ID</stringProp>
+                </collectionProp>
+                <collectionProp name="UserParameters.thread_values">
+                  <collectionProp name="-311272570">
+                    <stringProp name="1228486270">${REF_REQ_ID}</stringProp>
+                  </collectionProp>
+                </collectionProp>
+                <boolProp name="UserParameters.per_iteration">false</boolProp>
+              </UserParameters>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get Upcoming Concerts PostProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import groovy.json.JsonBuilder
+import groovy.json.JsonSlurper
+import org.apache.jmeter.samplers.SampleResult
+
+def retriesSoFar = vars.get(&quot;retryGetUpcomingConcerts&quot;) as Integer
+def maxRetries = &quot;${MAX_RETRIES}&quot; as Integer
+
+// Handle retries
+if (prev.isSuccessful()) {
+	// Set concert IDs for this current thread to be used in subsequent REST calls
+	def responseBody = new JsonSlurper().parseText(prev.getResponseDataAsString())
+	def concertIds = responseBody.items.collect { it.id }
+
+	vars.put(&quot;CONCERT_IDS&quot;, concertIds.join(&apos;,&apos;))
+	vars.put(&quot;CONCERT_ID&quot;, concertIds[0])
+
+	// Exit successfully
+	vars.put(&quot;RETRY_FLAG_GET_UPCOMING_CONCERTS&quot;, &quot;F&quot;)
+	vars.put(&quot;GET_UPCOMING_CONCERTS_ERROR&quot;, &quot;FALSE&quot;)
+} else {
+	if (retriesSoFar &lt; maxRetries) {
+		// Sleep and retry
+		def retryDelay = vars.get(&quot;RETRY_CONSTANT_DELAY_SQL_SEC&quot;) as Integer * 1000
+		Thread.sleep(retryDelay)
+	} else {
+		// Exceeded maximum number of retries
+		vars.put(&quot;RETRY_FLAG_GET_UPCOMING_CONCERTS&quot;, &quot;F&quot;)
+		vars.put(&quot;GET_UPCOMING_CONCERTS_ERROR&quot;, &quot;TRUE&quot;)
+	}
+}
+
+// Log telemetry data for this attempt
+def responseData = new JsonBuilder([
+    sessionId: vars.get(&quot;AZREF_SESSION_ID&quot;),
+    requestId: vars.get(&quot;AZREF_REQUEST_ID&quot;),
+    upcomingConcerts: vars.get(&quot;CONCERT_IDS&quot;),
+    retry: retriesSoFar
+])
+
+if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+    log.info(&quot;Request_GetUpcomingConcerts response code: &quot; + prev.getResponseCode().toString())
+    log.info(&quot;Request_GetUpcomingConcerts custom response data: &quot; + responseData.toPrettyString())
+}
+
+// Set and chain context
+prev.setResponseData(responseData.toPrettyString().getBytes())
+prev.setDataType(SampleResult.TEXT)
+</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">AZREF_SESSION_ID</stringProp>
+                    <stringProp name="Header.value">${AZREF_SESSION_ID}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">AZREF_REQUEST_ID</stringProp>
+                    <stringProp name="Header.value">${AZREF_REQUEST_ID}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">*/*</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assertion" enabled="true">
+                <stringProp name="cacheKey">false</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">if (vars.get(&quot;GET_UPCOMING_CONCERTS_ERROR&quot;).equalsIgnoreCase(&quot;TRUE&quot;)) {
+	if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+		log.error(&quot;Request_GetUpcomingConcerts failed&quot;)
+	}
+
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Request_GetUpcomingConcerts failed&quot;)
+}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+            <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+              <stringProp name="CounterConfig.start">1</stringProp>
+              <stringProp name="CounterConfig.end">${MAX_RETRIES}</stringProp>
+              <stringProp name="CounterConfig.incr">1</stringProp>
+              <stringProp name="CounterConfig.name">retryGetUpcomingConcerts</stringProp>
+              <stringProp name="CounterConfig.format"></stringProp>
+              <boolProp name="CounterConfig.per_user">true</boolProp>
+              <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+            </CounterConfig>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller - Get Concert" enabled="true"/>
+        <hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+            <stringProp name="IfController.condition">${__groovy(vars.get(&quot;GET_UPCOMING_CONCERTS_ERROR&quot;).equals(&quot;FALSE&quot;) ,)}</stringProp>
+          </IfController>
+          <hashTree>
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+              <collectionProp name="UserParameters.names">
+                <stringProp name="-824548920">REF_REQ_ID</stringProp>
+              </collectionProp>
+              <collectionProp name="UserParameters.thread_values">
+                <collectionProp name="681405977">
+                  <stringProp name="118040362">${__UUID()}</stringProp>
+                </collectionProp>
+              </collectionProp>
+              <boolProp name="UserParameters.per_iteration">true</boolProp>
+            </UserParameters>
+            <hashTree/>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller - Get Concert" enabled="true">
+              <stringProp name="WhileController.condition">${__groovy(vars.get(&quot;RETRY_FLAG_GET_CONCERT&quot;).equals(&quot;T&quot;), )}</stringProp>
+            </WhileController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Request_GetConcert" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${HOST_IP}</stringProp>
+                <stringProp name="HTTPSampler.port">443</stringProp>
+                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.path">/api/concerts/${CONCERT_ID}?AZREF_SESSION_ID=${AZREF_SESSION_ID}&amp;AZREF_REQUEST_ID=${AZREF_REQUEST_ID}&amp;AZREF_RETRY_COUNT=${retryGetConcert}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+                <boolProp name="HTTPSampler.image_parser">false</boolProp>
+                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+                <boolProp name="HTTPSampler.md5">false</boolProp>
+                <intProp name="HTTPSampler.ipSourceType">0</intProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout">${HTTP_CONNECT_TIMEOUT}</stringProp>
+                <stringProp name="HTTPSampler.response_timeout">600</stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+                  <collectionProp name="UserParameters.names">
+                    <stringProp name="-98944848">AZREF_REQUEST_ID</stringProp>
+                  </collectionProp>
+                  <collectionProp name="UserParameters.thread_values">
+                    <collectionProp name="-311272570">
+                      <stringProp name="1228486270">${REF_REQ_ID}</stringProp>
+                    </collectionProp>
+                  </collectionProp>
+                  <boolProp name="UserParameters.per_iteration">false</boolProp>
+                </UserParameters>
+                <hashTree/>
+                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get Concert PostProcessor" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">import groovy.json.JsonBuilder
+import groovy.json.JsonSlurper
+import org.apache.jmeter.samplers.SampleResult
+
+def retriesSoFar = vars.get(&quot;retryGetConcert&quot;) as Integer
+def maxRetries = &quot;${MAX_RETRIES}&quot; as Integer
+
+// Handle retries
+if (prev.isSuccessful()) {
+	// Exit successfully
+	vars.put(&quot;RETRY_FLAG_GET_CONCERT&quot;, &quot;F&quot;)
+	vars.put(&quot;GET_CONCERT_ERROR&quot;, &quot;FALSE&quot;)
+} else {
+	if (retriesSoFar &lt; maxRetries) {
+		// Sleep and retry
+		def retryDelay = vars.get(&quot;RETRY_CONSTANT_DELAY_SQL_SEC&quot;) as Integer * 1000
+		Thread.sleep(retryDelay)
+	} else {
+		// Exceeded maximum number of retries
+		vars.put(&quot;RETRY_FLAG_GET_CONCERT&quot;, &quot;F&quot;)
+		vars.put(&quot;GET_CONCERT_ERROR&quot;, &quot;TRUE&quot;)
+	}
+}
+
+
+// Log telemetry data for this attempt
+def responseData = new JsonBuilder([
+    sessionId: vars.get(&quot;AZREF_SESSION_ID&quot;),
+    requestId: vars.get(&quot;AZREF_REQUEST_ID&quot;),
+    concertId: vars.get(&quot;CONCERT_ID&quot;),
+    retry: retriesSoFar
+])
+
+if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+    log.info(&quot;Request_GetConcert response code: &quot; + prev.getResponseCode().toString())
+    log.info(&quot;Request_GetConcert custom response data: &quot; + responseData.toPrettyString())
+}
+
+// Set and chain context
+prev.setResponseData(responseData.toPrettyString().getBytes())
+prev.setDataType(SampleResult.TEXT)
+</stringProp>
+                </JSR223PostProcessor>
+                <hashTree/>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">AZREF_SESSION_ID</stringProp>
+                      <stringProp name="Header.value">${AZREF_SESSION_ID}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">AZREF_REQUEST_ID</stringProp>
+                      <stringProp name="Header.value">${AZREF_REQUEST_ID}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">*/*</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assertion" enabled="true">
+                  <stringProp name="cacheKey">false</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">if (vars.get(&quot;GET_CONCERT_ERROR&quot;).equalsIgnoreCase(&quot;TRUE&quot;)) {
+	if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+		log.error(&quot;Request_GetConcert failed&quot;)
+	}
+
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Request_GetConcert failed&quot;)
+}
+</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+              </hashTree>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end">${MAX_RETRIES}</stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">retryGetConcert</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller - Create User" enabled="true"/>
+        <hashTree>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="-824548920">REF_REQ_ID</stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="681405977">
+                <stringProp name="118040362">${__UUID()}</stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">true</boolProp>
+          </UserParameters>
+          <hashTree/>
+          <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller - Create User" enabled="true">
+            <stringProp name="WhileController.condition">${__groovy(vars.get(&quot;RETRY_FLAG_CREATE_USER&quot;).equals(&quot;T&quot;), )}</stringProp>
+          </WhileController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Request_CreateUser" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+    &quot;email&quot;: &quot;jmeter.user@example.com&quot;,&#xd;
+    &quot;phone&quot;: &quot;${__RandomString(10, 0123456789,)}&quot;,&#xd;
+    &quot;displayName&quot;: &quot;${__RandomString(10, abcdefghijklmnopqrstuvwxyz,)}, ${__RandomString(10, abcdefghijklmnopqrstuvwxyz,)}&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${HOST_IP}</stringProp>
+              <stringProp name="HTTPSampler.port">443</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">/api/users?AZREF_SESSION_ID=${AZREF_SESSION_ID}&amp;AZREF_REQUEST_ID=${AZREF_REQUEST_ID}&amp;AZREF_RETRY_COUNT=${retryCreateUser}</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">${HTTP_CONNECT_TIMEOUT}</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">600</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+                <collectionProp name="UserParameters.names">
+                  <stringProp name="-98944848">AZREF_REQUEST_ID</stringProp>
+                </collectionProp>
+                <collectionProp name="UserParameters.thread_values">
+                  <collectionProp name="-311272570">
+                    <stringProp name="1228486270">${REF_REQ_ID}</stringProp>
+                  </collectionProp>
+                </collectionProp>
+                <boolProp name="UserParameters.per_iteration">false</boolProp>
+              </UserParameters>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Create User PostProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import groovy.json.JsonBuilder
+import groovy.json.JsonSlurper
+import org.apache.jmeter.samplers.SampleResult
+
+def retriesSoFar = vars.get(&quot;retryCreateUser&quot;) as Integer
+def maxRetries = &quot;${MAX_RETRIES}&quot; as Integer
+
+// Handle retries
+if (prev.isSuccessful()) {
+	// Set user ID for this current thread to be used in subsequent REST calls
+	def responseBody = new JsonSlurper().parseText(prev.getResponseDataAsString())
+	vars.put(&quot;USER_ID&quot;, responseBody.id)
+
+	// Exit successfully
+	vars.put(&quot;RETRY_FLAG_CREATE_USER&quot;, &quot;F&quot;)
+	vars.put(&quot;CREATE_USER_ERROR&quot;, &quot;FALSE&quot;)
+} else {
+	if (retriesSoFar &lt; maxRetries) {
+		// Sleep and retry
+		def retryDelay = vars.get(&quot;RETRY_CONSTANT_DELAY_SQL_SEC&quot;) as Integer * 1000
+		Thread.sleep(retryDelay)
+	} else {
+		// Exceeded maximum number of retries
+		vars.put(&quot;RETRY_FLAG_CREATE_USER&quot;, &quot;F&quot;)
+		vars.put(&quot;CREATE_USER_ERROR&quot;, &quot;TRUE&quot;)
+	}
+}
+
+// Log telemetry data for this attempt
+def responseData = new JsonBuilder([
+    sessionId: vars.get(&quot;AZREF_SESSION_ID&quot;),
+    requestId: vars.get(&quot;AZREF_REQUEST_ID&quot;),
+    userId: vars.get(&quot;USER_ID&quot;),
+    retry: retriesSoFar
+])
+
+if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+    log.info(&quot;Request_CreateUser response code: &quot; + prev.getResponseCode().toString())
+    log.info(&quot;Request_CreateUser custom response data: &quot; + responseData.toPrettyString())
+}
+
+// Set and chain context
+prev.setResponseData(responseData.toPrettyString().getBytes())
+prev.setDataType(SampleResult.TEXT)
+</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">AZREF_SESSION_ID</stringProp>
+                    <stringProp name="Header.value">${AZREF_SESSION_ID}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">AZREF_REQUEST_ID</stringProp>
+                    <stringProp name="Header.value">${AZREF_REQUEST_ID}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">*/*</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assertion" enabled="true">
+                <stringProp name="cacheKey">false</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">if (vars.get(&quot;CREATE_USER_ERROR&quot;).equalsIgnoreCase(&quot;TRUE&quot;)) {
+	if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+		log.error(&quot;Request_CreateUser failed&quot;)
+	}
+
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Request_CreateUser failed&quot;)
+}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+            <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+              <stringProp name="CounterConfig.start">1</stringProp>
+              <stringProp name="CounterConfig.end">${MAX_RETRIES}</stringProp>
+              <stringProp name="CounterConfig.incr">1</stringProp>
+              <stringProp name="CounterConfig.name">retryCreateUser</stringProp>
+              <stringProp name="CounterConfig.format"></stringProp>
+              <boolProp name="CounterConfig.per_user">true</boolProp>
+              <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+            </CounterConfig>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller - Get User" enabled="true"/>
+        <hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+            <stringProp name="IfController.condition">${__groovy(vars.get(&quot;CREATE_USER_ERROR&quot;).equals(&quot;FALSE&quot;) &amp;&amp; !vars.get(&quot;USER_ID&quot;).equals(&quot;N/A&quot;) ,)}</stringProp>
+          </IfController>
+          <hashTree>
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+              <collectionProp name="UserParameters.names">
+                <stringProp name="-824548920">REF_REQ_ID</stringProp>
+              </collectionProp>
+              <collectionProp name="UserParameters.thread_values">
+                <collectionProp name="681405977">
+                  <stringProp name="118040362">${__UUID()}</stringProp>
+                </collectionProp>
+              </collectionProp>
+              <boolProp name="UserParameters.per_iteration">true</boolProp>
+            </UserParameters>
+            <hashTree/>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller - Get User" enabled="true">
+              <stringProp name="WhileController.condition">${__groovy(vars.get(&quot;RETRY_FLAG_GET_USER&quot;).equals(&quot;T&quot;) ,)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Request_GetUser" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${HOST_IP}</stringProp>
+                <stringProp name="HTTPSampler.port">443</stringProp>
+                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.path">/api/users/${USER_ID}?AZREF_SESSION_ID=${AZREF_SESSION_ID}&amp;AZREF_REQUEST_ID=${AZREF_REQUEST_ID}&amp;AZREF_RETRY_COUNT=${retryGetUser}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+                <boolProp name="HTTPSampler.image_parser">false</boolProp>
+                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+                <boolProp name="HTTPSampler.md5">false</boolProp>
+                <intProp name="HTTPSampler.ipSourceType">0</intProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout">${HTTP_CONNECT_TIMEOUT}</stringProp>
+                <stringProp name="HTTPSampler.response_timeout">600</stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+                  <collectionProp name="UserParameters.names">
+                    <stringProp name="-98944848">AZREF_REQUEST_ID</stringProp>
+                  </collectionProp>
+                  <collectionProp name="UserParameters.thread_values">
+                    <collectionProp name="-311272570">
+                      <stringProp name="1228486270">${REF_REQ_ID}</stringProp>
+                    </collectionProp>
+                  </collectionProp>
+                  <boolProp name="UserParameters.per_iteration">false</boolProp>
+                </UserParameters>
+                <hashTree/>
+                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get User PostProcessor" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">import groovy.json.JsonBuilder
+import org.apache.jmeter.samplers.SampleResult
+
+def retriesSoFar = vars.get(&quot;retryGetUser&quot;) as Integer
+def maxRetries = &quot;${MAX_RETRIES}&quot; as Integer
+
+// Handle retries
+if (prev.isSuccessful()) {
+	// Exit successfully
+	vars.put(&quot;RETRY_FLAG_GET_USER&quot;, &quot;F&quot;)
+	vars.put(&quot;GET_USER_ERROR&quot;, &quot;FALSE&quot;)
+} else {
+	if (retriesSoFar &lt; maxRetries) {
+		// Sleep and retry
+		def retryDelay = vars.get(&quot;RETRY_CONSTANT_DELAY_SQL_SEC&quot;) as Integer * 1000
+		Thread.sleep(retryDelay)
+	} else {
+		// Exceeded maximum number of retries
+		vars.put(&quot;RETRY_FLAG_GET_USER&quot;, &quot;F&quot;)
+		vars.put(&quot;GET_USER_ERROR&quot;, &quot;TRUE&quot;)
+	}
+}
+
+// Log telemetry data for this attempt
+def responseData = new JsonBuilder([
+    sessionId: vars.get(&quot;AZREF_SESSION_ID&quot;),
+    requestId: vars.get(&quot;AZREF_REQUEST_ID&quot;),
+    userId: vars.get(&quot;USER_ID&quot;),
+    retry: retriesSoFar
+])
+
+if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+    log.info(&quot;Request_GetUser response code: &quot; + prev.getResponseCode().toString())
+    log.info(&quot;Request_GetUser custom response data: &quot; + responseData.toPrettyString())
+}
+
+// Set and chain context
+prev.setResponseData(responseData.toPrettyString().getBytes())
+prev.setDataType(SampleResult.TEXT)</stringProp>
+                </JSR223PostProcessor>
+                <hashTree/>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">AZREF_SESSION_ID</stringProp>
+                      <stringProp name="Header.value">${AZREF_SESSION_ID}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">AZREF_REQUEST_ID</stringProp>
+                      <stringProp name="Header.value">${AZREF_REQUEST_ID}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">*/*</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assertion" enabled="true">
+                  <stringProp name="cacheKey">false</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">if (vars.get(&quot;GET_USER_ERROR&quot;).equalsIgnoreCase(&quot;TRUE&quot;)) {
+	if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+		log.error(&quot;Request_GetUser failed&quot;)
+	}
+
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Request_GetUser failed&quot;)
+}
+</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+              </hashTree>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end">${MAX_RETRIES}</stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">retryGetUser</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller - Add to Cart" enabled="true"/>
+        <hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <stringProp name="IfController.condition">${__groovy(vars.get(&quot;GET_UPCOMING_CONCERTS_ERROR&quot;).equals(&quot;FALSE&quot;) &amp;&amp; vars.get(&quot;CREATE_USER_ERROR&quot;).equals(&quot;FALSE&quot;) ,)}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller for Add to Cart" enabled="true">
+              <boolProp name="LoopController.continue_forever">true</boolProp>
+              <stringProp name="LoopController.loops">${ITEMS_PER_ORDER}</stringProp>
+            </LoopController>
+            <hashTree>
+              <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+                <collectionProp name="UserParameters.names">
+                  <stringProp name="-824548920">REF_REQ_ID</stringProp>
+                  <stringProp name="262646565">RETRY_COUNTER</stringProp>
+                  <stringProp name="-518179542">RETRY_FLAG_ADD_TO_CART</stringProp>
+                </collectionProp>
+                <collectionProp name="UserParameters.thread_values">
+                  <collectionProp name="1998841743">
+                    <stringProp name="118040362">${__UUID()}</stringProp>
+                    <stringProp name="49">1</stringProp>
+                    <stringProp name="84">T</stringProp>
+                  </collectionProp>
+                </collectionProp>
+                <boolProp name="UserParameters.per_iteration">true</boolProp>
+              </UserParameters>
+              <hashTree/>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="CounterLoop" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">loopIdx</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller - Add to Cart" enabled="true">
+                <stringProp name="WhileController.condition">${__groovy(vars.get(&quot;RETRY_FLAG_ADD_TO_CART&quot;).equals(&quot;T&quot;), )}</stringProp>
+              </WhileController>
+              <hashTree>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Request_AddToCart" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">{&#xd;
+    &quot;concertId&quot;: &quot;${NEXT_CART_ITEM_CONCERT_ID}&quot;,&#xd;
+    &quot;quantity&quot;: ${NEXT_CART_ITEM_QUANTITY}&#xd;
+}</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain">${HOST_IP}</stringProp>
+                  <stringProp name="HTTPSampler.port">443</stringProp>
+                  <stringProp name="HTTPSampler.protocol">https</stringProp>
+                  <stringProp name="HTTPSampler.path">/api/users/${USER_ID}/carts?AZREF_SESSION_ID=${AZREF_SESSION_ID}&amp;AZREF_REQUEST_ID=${AZREF_REQUEST_ID}&amp;AZREF_RETRY_COUNT=${retryAddToCart}</stringProp>
+                  <stringProp name="HTTPSampler.method">PUT</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+                  <boolProp name="HTTPSampler.image_parser">false</boolProp>
+                  <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+                  <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+                  <boolProp name="HTTPSampler.md5">false</boolProp>
+                  <intProp name="HTTPSampler.ipSourceType">0</intProp>
+                  <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout">${HTTP_CONNECT_TIMEOUT}</stringProp>
+                  <stringProp name="HTTPSampler.response_timeout">600</stringProp>
+                </HTTPSamplerProxy>
+                <hashTree>
+                  <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+                    <collectionProp name="UserParameters.names">
+                      <stringProp name="-98944848">AZREF_REQUEST_ID</stringProp>
+                    </collectionProp>
+                    <collectionProp name="UserParameters.thread_values">
+                      <collectionProp name="-311272570">
+                        <stringProp name="1228486270">${REF_REQ_ID}</stringProp>
+                      </collectionProp>
+                    </collectionProp>
+                    <boolProp name="UserParameters.per_iteration">false</boolProp>
+                  </UserParameters>
+                  <hashTree/>
+                  <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="AddToCart PreProcessor" enabled="true">
+                    <stringProp name="scriptLanguage">groovy</stringProp>
+                    <stringProp name="parameters"></stringProp>
+                    <stringProp name="filename"></stringProp>
+                    <stringProp name="cacheKey">true</stringProp>
+                    <stringProp name="script">def concertIds = vars.get(&quot;CONCERT_IDS&quot;).split(&apos;,&apos;)
+
+def concertIdsIdx = (Integer.parseInt(vars.get(&quot;loopIdx&quot;))) % concertIds.size()
+def ticketQuantity = 1 + concertIdsIdx.intdiv(concertIds.size()) // Every request adds 1 additional ticket
+
+vars.put(&quot;NEXT_CART_ITEM_CONCERT_ID&quot;, concertIds[concertIdsIdx])
+vars.putObject(&quot;NEXT_CART_ITEM_QUANTITY&quot;, ticketQuantity)
+</stringProp>
+                  </JSR223PreProcessor>
+                  <hashTree/>
+                  <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Add to Cart PostProcessor" enabled="true">
+                    <stringProp name="scriptLanguage">groovy</stringProp>
+                    <stringProp name="parameters"></stringProp>
+                    <stringProp name="filename"></stringProp>
+                    <stringProp name="cacheKey">true</stringProp>
+                    <stringProp name="script">import groovy.json.JsonBuilder
+import groovy.json.JsonSlurper
+import org.apache.jmeter.samplers.SampleResult
+
+def retriesSoFar = vars.get(&quot;retryAddToCart&quot;) as Integer
+def maxRetries = vars.get(&quot;MAX_RETRIES&quot;) as Integer
+def loopIdx = vars.get(&quot;loopIdx&quot;) as Integer
+def loopLimit = vars.get(&quot;ITEMS_PER_ORDER&quot;) as Integer
+
+// Handle retries
+if (prev.isSuccessful()) {
+	// Increment the number of tickets purchased
+    	def numTickets = vars.get(&quot;NumTickets&quot;) as Integer ?: 0
+    	vars.put(&quot;NumTickets&quot;, (numTickets + 1).toString())
+
+	// Exit successfully
+	vars.put(&quot;RETRY_FLAG_ADD_TO_CART&quot;, &quot;F&quot;)
+	if (loopIdx &gt;= loopLimit) {
+		vars.put(&quot;ADD_TO_CART_ERROR&quot;, &quot;FALSE&quot;)
+	}
+} else {
+	if (retriesSoFar &lt; maxRetries) {
+		// Sleep and retry
+		def retryDelay = vars.get(&quot;RETRY_CONSTANT_DELAY_SQL_SEC&quot;) as Integer * 1000
+		Thread.sleep(retryDelay)
+	} else {
+		// Exceeded maximum number of retries
+		vars.put(&quot;RETRY_FLAG_ADD_TO_CART&quot;, &quot;F&quot;)
+		vars.put(&quot;ADD_TO_CART_ERROR&quot;, &quot;TRUE&quot;)
+	}
+}
+
+// Log telemetry data for this attempt
+def responseData = new JsonBuilder([
+    sessionId: vars.get(&quot;AZREF_SESSION_ID&quot;),
+    requestId: vars.get(&quot;AZREF_REQUEST_ID&quot;),
+    userId: vars.get(&quot;USER_ID&quot;),
+    concertId: vars.get(&quot;NEXT_CART_ITEM_CONCERT_ID&quot;),
+    ticketQuantity: Integer.parseInt(vars.get(&quot;NEXT_CART_ITEM_QUANTITY&quot;)),
+    retry: retriesSoFar
+])
+
+if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+    log.info(&quot;Request_AddToCart response code: &quot; + prev.getResponseCode().toString())
+    log.info(&quot;Request_AddToCart custom response data: &quot; + responseData.toPrettyString())
+}
+
+// Set and chain context
+prev.setResponseData(responseData.toPrettyString().getBytes())
+prev.setDataType(SampleResult.TEXT)
+</stringProp>
+                  </JSR223PostProcessor>
+                  <hashTree/>
+                  <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                    <collectionProp name="HeaderManager.headers">
+                      <elementProp name="" elementType="Header">
+                        <stringProp name="Header.name">AZREF_SESSION_ID</stringProp>
+                        <stringProp name="Header.value">${AZREF_SESSION_ID}</stringProp>
+                      </elementProp>
+                      <elementProp name="" elementType="Header">
+                        <stringProp name="Header.name">AZREF_REQUEST_ID</stringProp>
+                        <stringProp name="Header.value">${AZREF_REQUEST_ID}</stringProp>
+                      </elementProp>
+                      <elementProp name="" elementType="Header">
+                        <stringProp name="Header.name">Accept</stringProp>
+                        <stringProp name="Header.value">*/*</stringProp>
+                      </elementProp>
+                      <elementProp name="" elementType="Header">
+                        <stringProp name="Header.name">Content-Type</stringProp>
+                        <stringProp name="Header.value">application/json</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </HeaderManager>
+                  <hashTree/>
+                  <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assertion" enabled="true">
+                    <stringProp name="cacheKey">false</stringProp>
+                    <stringProp name="filename"></stringProp>
+                    <stringProp name="parameters"></stringProp>
+                    <stringProp name="script">if (vars.get(&quot;ADD_TO_CART_ERROR&quot;).equalsIgnoreCase(&quot;TRUE&quot;)) {
+	if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+		log.error(&quot;Request_AddToCart failed&quot;)
+	}
+
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Request_AddToCart failed&quot;)
+}
+</stringProp>
+                    <stringProp name="scriptLanguage">groovy</stringProp>
+                  </JSR223Assertion>
+                  <hashTree/>
+                </hashTree>
+                <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+                  <stringProp name="CounterConfig.start">1</stringProp>
+                  <stringProp name="CounterConfig.end">${MAX_RETRIES}</stringProp>
+                  <stringProp name="CounterConfig.incr">1</stringProp>
+                  <stringProp name="CounterConfig.name">retryAddToCart</stringProp>
+                  <stringProp name="CounterConfig.format"></stringProp>
+                  <boolProp name="CounterConfig.per_user">true</boolProp>
+                  <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+                </CounterConfig>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller - Get and Validate Cart" enabled="true"/>
+        <hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <stringProp name="IfController.condition">${__groovy(vars.get(&quot;CREATE_USER_ERROR&quot;).equals(&quot;FALSE&quot;) &amp;&amp; vars.get(&quot;ADD_TO_CART_ERROR&quot;).equals(&quot;FALSE&quot;), )}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+              <collectionProp name="UserParameters.names">
+                <stringProp name="-824548920">REF_REQ_ID</stringProp>
+              </collectionProp>
+              <collectionProp name="UserParameters.thread_values">
+                <collectionProp name="681405977">
+                  <stringProp name="118040362">${__UUID()}</stringProp>
+                </collectionProp>
+              </collectionProp>
+              <boolProp name="UserParameters.per_iteration">true</boolProp>
+            </UserParameters>
+            <hashTree/>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller - Get and Validate Cart" enabled="true">
+              <stringProp name="WhileController.condition">${__groovy(vars.get(&quot;RETRY_FLAG_GET_AND_VALIDATE_CART&quot;).equals(&quot;T&quot;),)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Request_GetAndValidateCart" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="userId" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${UserId}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">userId</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${HOST_IP}</stringProp>
+                <stringProp name="HTTPSampler.port">443</stringProp>
+                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.path">/api/users/${USER_ID}/carts?AZREF_SESSION_ID=${AZREF_SESSION_ID}&amp;AZREF_REQUEST_ID=${AZREF_REQUEST_ID}&amp;AZREF_RETRY_COUNT=${retryGetAndValidateCart}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+                <boolProp name="HTTPSampler.image_parser">false</boolProp>
+                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+                <boolProp name="HTTPSampler.md5">false</boolProp>
+                <intProp name="HTTPSampler.ipSourceType">0</intProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout">${HTTP_CONNECT_TIMEOUT}</stringProp>
+                <stringProp name="HTTPSampler.response_timeout">600</stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+                  <collectionProp name="UserParameters.names">
+                    <stringProp name="-98944848">AZREF_REQUEST_ID</stringProp>
+                  </collectionProp>
+                  <collectionProp name="UserParameters.thread_values">
+                    <collectionProp name="-311272570">
+                      <stringProp name="1228486270">${REF_REQ_ID}</stringProp>
+                    </collectionProp>
+                  </collectionProp>
+                  <boolProp name="UserParameters.per_iteration">false</boolProp>
+                </UserParameters>
+                <hashTree/>
+                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get and Validate Cart PostProcessor" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">import org.apache.jmeter.samplers.SampleResult
+import groovy.json.JsonBuilder
+import groovy.json.JsonSlurper
+
+def httpCode = prev.getResponseCode().toString()
+def retriesSoFar = vars.get(&quot;retryGetAndValidateCart&quot;) as Integer
+def maxRetries = &quot;${MAX_RETRIES}&quot; as Integer
+def numTicketsBought = Integer.parseInt(vars.get(&quot;NumTickets&quot;))
+
+def numTicketsInCart = 0
+def itemsMatchedStatus = &quot;N/A&quot;
+
+// Handle retries
+if (prev.isSuccessful()) {
+	// Validate the number of tickets in the cart is the same as the number of tickets bought in the previous controller
+	def responseBody = new JsonSlurper().parseText(prev.getResponseDataAsString())
+
+	numTicketsInCart = responseBody.items?.size() &gt; 0 ? responseBody.items.collect { it.quantity }.sum() : 0
+	itemsMatchedStatus = (numTicketsInCart == numTicketsBought) ? &quot;TRUE&quot; : &quot;FALSE&quot;
+
+	// Exit successfully
+	vars.put(&quot;RETRY_FLAG_GET_AND_VALIDATE_CART&quot;, &quot;F&quot;)
+	vars.put(&quot;GET_AND_VALIDATE_CART_ERROR&quot;, &quot;FALSE&quot;)
+} else {
+	if (retriesSoFar &lt; maxRetries) {
+		// Sleep and retry
+		def retryDelay = vars.get(&quot;RETRY_CONSTANT_DELAY_SQL_SEC&quot;) as Integer * 1000
+		Thread.sleep(retryDelay)
+	} else {
+		// Exceeded maximum number of retries
+		vars.put(&quot;RETRY_FLAG_GET_AND_VALIDATE_CART&quot;, &quot;F&quot;)
+		vars.put(&quot;GET_AND_VALIDATE_CART_ERROR&quot;, &quot;TRUE&quot;)
+	}
+}
+
+// Log telemetry data for this attempt
+def responseData = new JsonBuilder([
+    sessionId: vars.get(&quot;AZREF_SESSION_ID&quot;),
+    requestId: vars.get(&quot;AZREF_REQUEST_ID&quot;),
+    userId: vars.get(&quot;USER_ID&quot;),
+    retry: retriesSoFar,
+    itemsCount: numTicketsInCart,
+    itemsExpected: numTicketsBought,
+    itemsMatched: itemsMatchedStatus
+])
+
+if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+    log.info(&quot;Request_GetAndValidateCart response code: &quot; + httpCode)
+    log.info(&quot;Request_GetAndValidateCart tickets expected: &quot; + numTicketsBought)
+    log.info(&quot;Request_GetAndValidateCart items in cart: &quot; +  numTicketsInCart)
+    log.info(&quot;Request_GetAndValidateCart custom response data: &quot; + responseData.toPrettyString())
+}
+
+// Set and chain context
+prev.setResponseData(responseData.toPrettyString().getBytes())
+prev.setDataType(SampleResult.TEXT)</stringProp>
+                </JSR223PostProcessor>
+                <hashTree/>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">AZREF_SESSION_ID</stringProp>
+                      <stringProp name="Header.value">${AZREF_SESSION_ID}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">AZREF_REQUEST_ID</stringProp>
+                      <stringProp name="Header.value">${AZREF_REQUEST_ID}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">*/*</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assertion" enabled="true">
+                  <stringProp name="cacheKey">false</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">if (vars.get(&quot;GET_AND_VALIDATE_CART_ERROR&quot;).equalsIgnoreCase(&quot;TRUE&quot;)) {
+	if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+		log.error(&quot;Request_GetAndValidateCart failed&quot;)
+	}
+
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Request_GetAndValidateCart failed&quot;)
+}
+</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+              </hashTree>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end">${MAX_RETRIES}</stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">retryGetAndValidateCart</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller - Create Order" enabled="true"/>
+        <hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <stringProp name="IfController.condition">${__groovy(vars.get(&quot;CREATE_USER_ERROR&quot;).equals(&quot;FALSE&quot;) &amp;&amp; vars.get(&quot;ADD_TO_CART_ERROR&quot;).equals(&quot;FALSE&quot;), )}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+              <collectionProp name="UserParameters.names">
+                <stringProp name="-824548920">REF_REQ_ID</stringProp>
+              </collectionProp>
+              <collectionProp name="UserParameters.thread_values">
+                <collectionProp name="681405977">
+                  <stringProp name="118040362">${__UUID()}</stringProp>
+                </collectionProp>
+              </collectionProp>
+              <boolProp name="UserParameters.per_iteration">true</boolProp>
+            </UserParameters>
+            <hashTree/>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller - Create Order" enabled="true">
+              <stringProp name="WhileController.condition">${__groovy(vars.get(&quot;RETRY_FLAG_CREATE_ORDER&quot;).equals(&quot;T&quot;), )}</stringProp>
+            </WhileController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Request_CreateOrder" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{&#xd;
+    &quot;cardholder&quot;: &quot;Jmeter User&quot;,&#xd;
+    &quot;cardNumber&quot;: &quot;378282246310005&quot;,&#xd;
+    &quot;securityCode&quot;: &quot;123&quot;,&#xd;
+    &quot;expirationMonthYear&quot;: &quot;1029&quot;&#xd;
+}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${HOST_IP}</stringProp>
+                <stringProp name="HTTPSampler.port">443</stringProp>
+                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.path">/api/users/${USER_ID}/orders?AZREF_SESSION_ID=${AZREF_SESSION_ID}&amp;AZREF_REQUEST_ID=${AZREF_REQUEST_ID}&amp;AZREF_RETRY_COUNT=${retryCreateOrder}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+                <boolProp name="HTTPSampler.image_parser">false</boolProp>
+                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+                <boolProp name="HTTPSampler.md5">false</boolProp>
+                <intProp name="HTTPSampler.ipSourceType">0</intProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout">${HTTP_CONNECT_TIMEOUT}</stringProp>
+                <stringProp name="HTTPSampler.response_timeout">600</stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+                  <collectionProp name="UserParameters.names">
+                    <stringProp name="-98944848">AZREF_REQUEST_ID</stringProp>
+                  </collectionProp>
+                  <collectionProp name="UserParameters.thread_values">
+                    <collectionProp name="-311272570">
+                      <stringProp name="1228486270">${REF_REQ_ID}</stringProp>
+                    </collectionProp>
+                  </collectionProp>
+                  <boolProp name="UserParameters.per_iteration">false</boolProp>
+                </UserParameters>
+                <hashTree/>
+                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Create Order PostProcessor" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">import org.apache.jmeter.samplers.SampleResult
+import groovy.json.JsonBuilder
+import groovy.json.JsonSlurper
+
+def retriesSoFar = vars.get(&quot;retryCreateOrder&quot;) as Integer
+def maxRetries = vars.get(&quot;MAX_RETRIES&quot;) as Integer
+
+// Handle retries
+if (prev.isSuccessful()) {
+	def responseBody = new JsonSlurper().parseText(prev.getResponseDataAsString())
+	vars.put(&quot;ORDER_ID&quot;, responseBody.orderId)
+
+	// Exit successfully
+	vars.put(&quot;RETRY_FLAG_CREATE_ORDER&quot;, &quot;F&quot;)
+	vars.put(&quot;CREATE_ORDER_ERROR&quot;, &quot;FALSE&quot;)
+} else {
+	if (retriesSoFar &lt; maxRetries) {
+		// Sleep and retry
+		def retryDelay = vars.get(&quot;RETRY_CONSTANT_DELAY_SQL_SEC&quot;) as Integer * 1000
+		Thread.sleep(retryDelay)
+	} else {
+		// Exceeded maximum number of retries
+		vars.put(&quot;RETRY_FLAG_CREATE_ORDER&quot;, &quot;F&quot;)
+		vars.put(&quot;CREATE_ORDER_ERROR&quot;, &quot;TRUE&quot;)
+	}
+}
+
+// Log the telemetry data for this attempt
+def responseData = new JsonBuilder([
+    sessionId: vars.get(&quot;AZREF_SESSION_ID&quot;),
+    requestId: vars.get(&quot;AZREF_REQUEST_ID&quot;),
+    userId: vars.get(&quot;USER_ID&quot;),
+    orderId: vars.get(&quot;ORDER_ID&quot;),
+    retry: retriesSoFar
+])
+
+if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+    log.info(&quot;Request_CreateOrder response code: &quot; + prev.getResponseCode())
+    log.info(&quot;Request_CreateOrder custom response data: &quot; + responseData.toPrettyString())
+}
+
+// Set and chain context
+prev.setResponseData(responseData.toPrettyString().getBytes())
+prev.setDataType(SampleResult.TEXT)
+</stringProp>
+                </JSR223PostProcessor>
+                <hashTree/>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">AZREF_SESSION_ID</stringProp>
+                      <stringProp name="Header.value">${AZREF_SESSION_ID}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">AZREF_REQUEST_ID</stringProp>
+                      <stringProp name="Header.value">${AZREF_REQUEST_ID}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">*/*</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assertion" enabled="true">
+                  <stringProp name="cacheKey">false</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">if (vars.get(&quot;CREATE_ORDER_ERROR&quot;).equalsIgnoreCase(&quot;TRUE&quot;)) {
+	if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+		log.error(&quot;Request_CreateOrder failed&quot;)
+	}
+
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Request_CreateOrder failed&quot;)
+}</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+              </hashTree>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end">${MAX_RETRIES}</stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">retryCreateOrder</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller - Get Orders" enabled="true"/>
+        <hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+            <stringProp name="IfController.condition">${__groovy(vars.get(&quot;CREATE_USER_ERROR&quot;).equals(&quot;FALSE&quot;) &amp;&amp; vars.get(&quot;CREATE_ORDER_ERROR&quot;).equals(&quot;FALSE&quot;) ,)}</stringProp>
+          </IfController>
+          <hashTree>
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+              <collectionProp name="UserParameters.names">
+                <stringProp name="-824548920">REF_REQ_ID</stringProp>
+              </collectionProp>
+              <collectionProp name="UserParameters.thread_values">
+                <collectionProp name="681405977">
+                  <stringProp name="118040362">${__UUID()}</stringProp>
+                </collectionProp>
+              </collectionProp>
+              <boolProp name="UserParameters.per_iteration">true</boolProp>
+            </UserParameters>
+            <hashTree/>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller - Get Orders" enabled="true">
+              <stringProp name="WhileController.condition">${__groovy(vars.get(&quot;RETRY_FLAG_GET_ORDERS&quot;).equals(&quot;T&quot;), )}</stringProp>
+            </WhileController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Request_GetOrders" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="skip" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">0</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">skip</stringProp>
+                    </elementProp>
+                    <elementProp name="take" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">5</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">take</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${HOST_IP}</stringProp>
+                <stringProp name="HTTPSampler.port">443</stringProp>
+                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.path">/api/users/${USER_ID}/orders?AZREF_SESSION_ID=${AZREF_SESSION_ID}&amp;AZREF_REQUEST_ID=${AZREF_REQUEST_ID}&amp;AZREF_RETRY_COUNT=${retryGetOrders}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+                <boolProp name="HTTPSampler.image_parser">false</boolProp>
+                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+                <boolProp name="HTTPSampler.md5">false</boolProp>
+                <intProp name="HTTPSampler.ipSourceType">0</intProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout">${HTTP_CONNECT_TIMEOUT}</stringProp>
+                <stringProp name="HTTPSampler.response_timeout">600</stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+                  <collectionProp name="UserParameters.names">
+                    <stringProp name="-98944848">AZREF_REQUEST_ID</stringProp>
+                  </collectionProp>
+                  <collectionProp name="UserParameters.thread_values">
+                    <collectionProp name="-311272570">
+                      <stringProp name="1228486270">${REF_REQ_ID}</stringProp>
+                    </collectionProp>
+                  </collectionProp>
+                  <boolProp name="UserParameters.per_iteration">false</boolProp>
+                </UserParameters>
+                <hashTree/>
+                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get Orders PostProcessor" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">import org.apache.jmeter.samplers.SampleResult
+import groovy.json.JsonBuilder
+import groovy.json.JsonSlurper
+
+def retriesSoFar = vars.get(&quot;retryGetOrders&quot;) as Integer
+def maxRetries = vars.get(&quot;MAX_RETRIES&quot;) as Integer
+
+def numExpectedOrders = 1
+def numRegisteredOrders = 0
+def ordersMatchedStatus = &quot;N/A&quot;
+
+// Handle retries
+if (prev.isSuccessful()) {
+	// Extract the number of orders for the user
+	def responseBody = new JsonSlurper().parseText(prev.getResponseDataAsString())
+
+	numRegisteredOrders = responseBody.totalCount
+	ordersMatchedStatus = (numRegisteredOrders == numExpectedOrders) ? &quot;TRUE&quot; : &quot;FALSE&quot;
+
+	// Exit successfully
+	vars.put(&quot;RETRY_FLAG_GET_ORDERS&quot;, &quot;F&quot;)
+	vars.put(&quot;GET_ORDERS_ERROR&quot;, &quot;FALSE&quot;)
+} else {
+	if (retriesSoFar &lt; maxRetries) {
+		// Sleep and retry
+		def retryDelay = vars.get(&quot;RETRY_CONSTANT_DELAY_SQL_SEC&quot;) as Integer * 1000
+		Thread.sleep(retryDelay)
+	} else {
+		// Exceeded maximum number of retries
+		vars.put(&quot;RETRY_FLAG_GET_ORDERS&quot;, &quot;F&quot;)
+		vars.put(&quot;GET_ORDERS_ERROR&quot;, &quot;TRUE&quot;)
+	}
+}
+
+// Log telemetry data for this attempt
+def responseData = new JsonBuilder([
+    sessionId: vars.get(&quot;AZREF_SESSION_ID&quot;),
+    requestId: vars.get(&quot;AZREF_REQUEST_ID&quot;),
+    userId: vars.get(&quot;USER_ID&quot;),
+    retry: retriesSoFar,
+    itemsCount: numRegisteredOrders,
+    itemsExpected: numExpectedOrders,
+    itemsMatched: ordersMatchedStatus
+])
+
+if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+    log.info(&quot;Request_GetOrders response code: &quot; + prev.getResponseCode().toString())
+    log.info(&quot;Request_GetOrders custom response data: &quot; + responseData.toPrettyString())
+}
+
+// Set and chain context
+prev.setResponseData(responseData.toPrettyString().getBytes())
+prev.setDataType(SampleResult.TEXT)</stringProp>
+                </JSR223PostProcessor>
+                <hashTree/>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">AZREF_SESSION_ID</stringProp>
+                      <stringProp name="Header.value">${AZREF_SESSION_ID}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">AZREF_REQUEST_ID</stringProp>
+                      <stringProp name="Header.value">${AZREF_REQUEST_ID}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">*/*</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assertion" enabled="true">
+                  <stringProp name="cacheKey">false</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">if (vars.get(&quot;GET_ORDERS_ERROR&quot;).equalsIgnoreCase(&quot;TRUE&quot;)) {
+	if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+		log.error(&quot;Request_GetOrders failed&quot;)
+	}
+
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Request_GetOrders failed&quot;)
+}</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+              </hashTree>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end">${MAX_RETRIES}</stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">retryGetOrders</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller - Reset flags" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ScenarioEnd" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import groovy.json.JsonBuilder
+
+def responseData = new JsonBuilder()
+responseData {
+    sessionId vars.get(&quot;AZREF_SESSION_ID&quot;)
+    requestId vars.get(&quot;AZREF_REQUEST_ID&quot;)
+    userId vars.get(&quot;USER_ID&quot;)
+    getUpcomingConcertsError vars.get(&quot;GET_UPCOMING_CONCERTS_ERROR&quot;)
+    getConcertError vars.get(&quot;GET_CONCERT_ERROR&quot;)
+    createUserError vars.get(&quot;CREATE_USER_ERROR&quot;)
+    getUserError vars.get(&quot;GET_USER_ERROR&quot;)
+    addToCartError vars.get(&quot;ADD_TO_CART_ERROR&quot;)
+    getAndValidateCartError vars.get(&quot;GET_AND_VALIDATE_CART_ERROR&quot;)
+    createOrderError vars.get(&quot;CREATE_ORDER_ERROR&quot;)
+    getOrdersError vars.get(&quot;GET_ORDERS_ERROR&quot;)
+}
+
+vars.put(&quot;GET_UPCOMING_CONCERTS_ERROR&quot;, &quot;TRUE&quot;)
+vars.put(&quot;GET_CONCERT_ERROR&quot;, &quot;TRUE&quot;)
+vars.put(&quot;CREATE_USER_ERROR&quot;, &quot;TRUE&quot;)
+vars.put(&quot;GET_USER_ERROR&quot;, &quot;TRUE&quot;)
+vars.put(&quot;ADD_TO_CART_ERROR&quot;, &quot;PENDING&quot;)
+vars.put(&quot;GET_AND_VALIDATE_CART_ERROR&quot;, &quot;TRUE&quot;)
+vars.put(&quot;CREATE_ORDER_ERROR&quot;, &quot;TRUE&quot;)
+vars.put(&quot;GET_ORDERS_ERROR&quot;, &quot;TRUE&quot;)
+
+vars.put(&quot;RETRY_FLAG_GET_UPCOMING_CONCERTS&quot;, &quot;T&quot;)
+vars.put(&quot;RETRY_FLAG_GET_CONCERT&quot;, &quot;T&quot;)
+vars.put(&quot;RETRY_FLAG_CREATE_USER&quot;, &quot;T&quot;)
+vars.put(&quot;RETRY_FLAG_GET_USER&quot;, &quot;T&quot;)
+vars.put(&quot;RETRY_FLAG_ADD_TO_CART&quot;, &quot;T&quot;)
+vars.put(&quot;RETRY_FLAG_GET_AND_VALIDATE_CART&quot;, &quot;T&quot;)
+vars.put(&quot;RETRY_FLAG_CREATE_ORDER&quot;, &quot;T&quot;)
+vars.put(&quot;RETRY_FLAG_GET_ORDERS&quot;, &quot;T&quot;)
+
+vars.put(&quot;NumTickets&quot;, &quot;0&quot;)
+
+if (vars.get(&quot;ADDITIONAL_LOGGING_FLAG&quot;) == &quot;TRUE&quot;) {
+    log.info(&quot;ScenarioEnd custom response data: &quot; + responseData.toPrettyString())
+}
+
+return responseData.toPrettyString()
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

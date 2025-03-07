@@ -1,0 +1,12 @@
+{
+    "sharedAcrResourceGroupName": "rg-azref-shared",
+    "sharedAcrName": "azrefsharedlz2a",
+    "systemNodeCount": 3,
+    "userNodeCount": 3,
+    "userMinNodeCount": 3,
+    "userMaxNodeCount": 6,
+    "userMaxPodsCount": 10,
+    "nodeVMSize": "standard_d4_v5",
+    "nodeOsSKU": "Ubuntu",
+    "availabilityZones": ["1", "2", "3"]
+}

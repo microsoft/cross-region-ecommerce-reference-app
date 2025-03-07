@@ -1,0 +1,64 @@
+services:
+  webapp:
+    build:
+      context: ../src/app/Api
+      dockerfile: Dockerfile
+      args:
+        - LOCALBUILD=true
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MY_NODE_NAME=apinode
+      - USE_SELF_HOSTED_DATASTORE=true
+      - SQL_ENDPOINT=sqlserver
+      - SQL_APP_DATABASE_NAME=testdb
+      - SQL_USER=sa
+      - SQL_PASSWORD=${SA_PASSWORD}
+      - REDIS_ENDPOINT=redis:6379
+      - DATABASE_CLEANUP_ENABLED=true
+      - DATABASE_CLEANUP_RECORD_COUNT=1000
+      - DATABASE_CLEANUP_THRESHOLD_MINUTES=30
+      - RPOL_CONNECT_RETRY=3
+      - RPOL_BACKOFF_DELTA=500
+      - Logging__LogLevel__Api__Controllers__CartsController=Information
+      - Logging__LogLevel__Api__Controllers__ConcertsController=Information
+      - Logging__LogLevel__Api__Controllers__OrdersController=Information
+      - Logging__LogLevel__Api__Controllers__UsersController=Information
+    depends_on:
+      redis:
+        condition: service_healthy
+      sqlserver:
+        condition: service_healthy
+    healthcheck:
+      test: curl --silent --fail http://webapp:8080/api/live || exit 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  redis:
+      image: redis
+      ports:
+        - 6379:6379
+      healthcheck:
+        test: redis-cli --raw incr ping
+        interval: 10s
+        retries: 5
+        start_period: 10s
+        timeout: 3s
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer
+      - MSSQL_SA_PASSWORD=${SA_PASSWORD}
+    ports:
+      - 1433:1433
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P $${MSSQL_SA_PASSWORD} -Q "CREATE DATABASE IF NOT EXISTS testdb" || exit 1
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 3s

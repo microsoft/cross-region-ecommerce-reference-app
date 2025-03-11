@@ -2,7 +2,7 @@
 
 The Cross-Region ECommerce Reference Application is a synthetic workload that mirrors a simple, bare-bones, e-commerce platform. It is built on top of the [Resilient ECommerce Reference Application](https://github.com/microsoft/resilient-ecommerce-reference-app) and its purpose is to demonstrate how to further leverage Azure Resiliency best practices to achieve cross-regional resiliency and ensure availability during regional outages.
 
-For a better understanding of the project, consider checking the original application before diving into this one. We will expand only on the improvements that we made, and not on the whole architecture.
+For a better understanding of the project, consider checking the original application before diving into this one.
 
 Follow the instructions in [the setup readme file](doc/SETUP.md) to start using the app. It can be used for educational purposes or as a starting point for developing new resilient applications.
 
@@ -16,10 +16,6 @@ Follow the instructions in [the setup readme file](doc/SETUP.md) to start using 
   - [Compute Architecture](#compute-architecture)
 - [Failover](#failover)
 
-
-# Introduction
-
-The initial [Resilient Ecommerce Reference Application](https://techcommunity.microsoft.com/blog/azurearchitectureblog/availability-zone-resiliency-on-ecommerce-reference-application/4351732) demonstrated the best practices to achieve regional resiliency using Azure's availability zones. Expanding on this foundation, in the current article we aim to achieve cross-region resiliency, ensuring high availability and disaster recovery capabilities across multiple geographic regions. This document outlines the enhancements made to extend the application into a cross-region resilient architecture.
 
 # Overview of Cross-Region Enhancements
 

@@ -4,17 +4,6 @@ param serviceLocation string = resourceGroup().location
 @description('The failover location of the service (API) resources.')
 param secondaryServiceLocation string = ''
 
-@description('The location of the client (JMeter) resources.')
-param clientLocation string = 'westus3'
-
-@description('''
-  The name of the Aurora data plane manifest name. Represents the Aurora "check tool"
-  to provision and run on dedicated VMs. If none provided, skip the creation
-  of the data plane infrastructure required by Aurora long-haul workloads.
-  Usually provided when deploying from the Aurora manifest.
-''')
-param manifestName string = ''
-
 @description('The AKS node cluster configuration for the service API')
 param aksConfig array
 
@@ -34,16 +23,6 @@ param crossRegionalRouting string = ''
 
 var secondaryLocation = trim(secondaryServiceLocation) // trim to remove any tailing spaces
 var isGeoReplicated = !empty(secondaryLocation)
-
-// Stack containing the client (JMeter & Aurora) resources
-module clientStack './client/clientStack.bicep' = {
-  name: 'clientStack'
-  params: {
-    clientLocation: clientLocation
-    manifestName: manifestName
-    resourceSuffixUID: resourceSuffixUID
-  }
-}
 
 // The app identity (service pods managed identity)
 // Assigned to a service location, but used globally: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/managed-identities-faq#can-the-same-managed-identity-be-used-across-multiple-regions
@@ -100,8 +79,10 @@ module computeStacks './compute/computeStack.bicep' = [
       workspaceId: monitoringStacks[idx].outputs.workspaceId
       aksConfig: aksConfig[idx]
       appGatewaySubnetId: networkStacks[idx].outputs.appGatewaySubnetId
+      vnetId: networkStacks[idx].outputs.vnetId
       vnetName: networkStacks[idx].outputs.vnetName
       aksSubnetId: networkStacks[idx].outputs.aksSubnetId
+      infraSubnetId: networkStacks[idx].outputs.infraSubnetId
     }
     dependsOn: [
       networkStacks[idx]
@@ -306,7 +287,4 @@ resource cdn_waf_security_policy 'Microsoft.Cdn/profiles/securitypolicies@2021-0
   }
 }
 
-output loadTestingAppInsightsConnection string = clientStack.outputs.loadTestingAppInsightsConnection
 output frontDoorEndpointHostName string = frontDoorEndpoint.properties.hostName
-output loadTestingResourceName string = clientStack.outputs.loadTestingResourceName
-output logAnalyticsWorkspaceId string = clientStack.outputs.logAnalyticsWorkspaceId

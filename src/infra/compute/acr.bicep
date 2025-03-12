@@ -16,7 +16,9 @@ param infraSubnetId string
 @description('The resource ID of the Log Analytics workspace to which the ACR is connected to.')
 param workspaceId string
 
-var containerRegistryName = 'containerregistry${resourceSuffixUID}'
+// Remove any dashes as ACR only supports alphanumeric characters
+var parsedSuffix = replace(resourceSuffixUID, '-', '')
+var containerRegistryName = 'containerregistry${parsedSuffix}'
 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2021-09-01' = {
   name: containerRegistryName
@@ -42,60 +44,6 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2021-09-01' =
     }
     publicNetworkAccess: 'Enabled'
     zoneRedundancy: 'Enabled'
-  }
-}
-
-// private DNS zone
-resource privateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
-  name: 'privatelink.azurecr.io'
-  location: 'global'
-}
-// link to VNET
-resource privateDnsZoneVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
-  parent: privateDnsZone
-  name: 'vnetLink'
-  location: 'global'
-  properties: {
-    registrationEnabled: false
-    virtualNetwork: {
-      id: vnetId
-    }
-  }
-}
-
-resource privateEndpoint 'Microsoft.Network/privateEndpoints@2022-01-01' = {
-  name: '${containerRegistryName}-acr'
-  location: location
-  properties: {
-    privateLinkServiceConnections: [
-      {
-        name: 'acr-link'
-        properties: {
-          privateLinkServiceId: containerRegistry.id
-          groupIds: [
-            'registry'
-          ] 
-        }
-      }
-    ]
-    subnet: {
-      id: infraSubnetId
-    }
-  }
-
-  // register in DNS
-  resource privateDnsZoneGroup 'privateDnsZoneGroups@2022-01-01' = {
-    name:  'acr-dns'
-    properties:{
-      privateDnsZoneConfigs: [
-        {
-          name: 'acr-config'
-          properties:{
-            privateDnsZoneId: privateDnsZone.id
-          }
-        }
-      ]
-    }
   }
 }
 

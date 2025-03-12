@@ -67,8 +67,6 @@ if [ -z $SECONDARY_SERVICE_LOCATION ]; then
   echo "No secondary service location provided. Deploying a regional version" >&2
 fi
 
-echo $PRIMARY_AKS_CAPACITY
-
 if [ -z $PRIMARY_AKS_CAPACITY ]; then
   echo "Primary AKS capacity not provided. Defaulting to full"
   PRIMARY_AKS_CAPACITY="full"

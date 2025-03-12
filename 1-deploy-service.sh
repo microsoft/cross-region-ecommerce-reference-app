@@ -71,7 +71,7 @@ echo "Fetching ACR URI and Id"
 
 ACR_URI=$(az acr list --resource-group $RESOURCE_GROUP_NAME --query "[0].loginServer" -o tsv)
 ACR_ID=$(az acr list --resource-group $RESOURCE_GROUP_NAME --query "[0].id" -o tsv)
-LOGGED_IN_USER=$(az account show --query user.name -o tsv)
+LOGGED_IN_USER=$(az ad signed-in-user show --query "id" -o tsv)
 echo "ACR URI: $ACR_URI"
 
 

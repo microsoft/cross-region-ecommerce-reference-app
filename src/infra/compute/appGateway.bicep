@@ -20,12 +20,6 @@ resource publicIPAddress 'Microsoft.Network/publicIPAddresses@2021-05-01' = {
     publicIPAddressVersion: 'IPv4'
     publicIPAllocationMethod: 'Static'
     idleTimeoutInMinutes: 4
-    ipTags: [
-      {
-        ipTagType: 'FirstPartyUsage'
-        tag: '/SyntheticLoad'
-      }
-    ]
   }
 }
 

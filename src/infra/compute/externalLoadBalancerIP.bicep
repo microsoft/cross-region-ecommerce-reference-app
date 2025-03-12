@@ -12,12 +12,6 @@ resource publicIP 'Microsoft.Network/publicIPAddresses@2022-01-01' = {
   properties: {
     publicIPAllocationMethod: 'Static'
     publicIPAddressVersion: 'IPv4'
-    ipTags: [
-      {
-        ipTagType: 'FirstPartyUsage'
-        tag: '/SyntheticLoad'
-      }
-    ]
   }
 }
 

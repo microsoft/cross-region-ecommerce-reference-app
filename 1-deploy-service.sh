@@ -19,12 +19,11 @@ Usage: $0 [-rg=rg-name] [-sl=service-location] [--what-if]
 
   -rg, --resource-group                 Name of the existing resource group to deploy to. Takes precedence over service location
   -sl, --service-location               Location to deploy the service to. A new resource group will be created in this location if no resource group is provided. If a resource group is provided,
-                                                this is ignored and the location of the resource group will be used
+                                        this is ignored and the location of the resource group will be used
   -ssl, --secondary-service-location    Location to deploy the secondary service to. Required for geo-replicated deployments
   -pac, --primary-aks-capacity          Capacity configuration for the primary AKS cluster. Options: full, reduced. Default: full
   -sac, --secondary-aks-capacity        Capacity configuration for the secondary AKS cluster. Options: full, reduced. Default: reduced
-  -crr, --cross-regional-routing        Specify the routing strategy between regions
-  --manifest-name                       Name of the Aurora data-plane manifest to deploy. Default: no manifest deployed. Skips the deployment of the Aurora data-plane VMs
+  -crr, --cross-regional-routing        Specify the cross-regional routing strategy. Allowed values are "active-active" and "active-passive". Default: active-passive
   --what-if                             Show what would happen if the deployment were run, but do not actually run it
   -h, --help                            Show this help message
 

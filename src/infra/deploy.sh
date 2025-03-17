@@ -17,10 +17,6 @@ for ARG in "$@"; do
       SERVICE_LOCATION="${ARG#*=}"
       shift
       ;;
-    -mn=*|--manifest-name=*)
-      MANIFEST_NAME="${ARG#*=}"
-      shift
-      ;;
     -ssl=*|--secondary-service-location=*)
       SECONDARY_SERVICE_LOCATION="${ARG#*=}"
       shift
@@ -65,6 +61,11 @@ if [ -z $SERVICE_LOCATION ]; then
 fi
 if [ -z $SECONDARY_SERVICE_LOCATION ]; then
   echo "No secondary service location provided. Deploying a regional version" >&2
+else
+  if [ -z $CROSS_REGIONAL_ROUTING ]; then
+    echo "No cross regional routing provided. Defaulting to active-passive"
+    CROSS_REGIONAL_ROUTING="active-passive"
+  fi
 fi
 
 if [ -z $PRIMARY_AKS_CAPACITY ]; then

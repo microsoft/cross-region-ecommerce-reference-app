@@ -16,16 +16,16 @@ for ARG in "$@"; do
       ;;
     -h|--help)
       echo "
-                Usage: $0 [-rg=rg-name] [-cl=client-location] [-sl=service-location] [--what-if]
+Usage: $0 [-rg=rg-name] [-cl=client-location] [-sl=service-location] [--what-if]
 
-                -tag, --image-tag             Image tag. e.g. staging, latest
-                -acr, --acr-name              Azure Container Registry name. e.g. test.azureacr.io
-                -bn, --build-number           Build number. Required when tag is latest. e.g. 1
-                -h, --help                    Show this help message
+  -tag, --image-tag             Image tag. e.g. staging, latest
+  -acr, --acr-name              Azure Container Registry name. e.g. test.azureacr.io
+  -bn, --build-number           Build number. Required when tag is latest. e.g. 1
+  -h, --help                    Show this help message
 
-                Examples:
-                $0 -sl=eastus
-            "
+Examples:
+  $0 -sl=eastus
+"
       exit 0
       ;;
     -*|--*)

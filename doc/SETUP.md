@@ -26,6 +26,8 @@ Ensure the OperationsManagement resource provider is registered
 
 `az provider register --namespace 'Microsoft.OperationsManagement'`
 
+### Deploy
+
 Deploy using:
 
 `./1-deploy-service.sh --service-location=primary-region --secondary-service-location=secondary-region`
@@ -41,12 +43,22 @@ The output format looks like this:
 
 The script will take the name (e.g. westus, westeurope) as input.
 
+You can customize deployment options such as the capacity of the AKS clusters and the cross regional routing stategy using parameters.
+
+We have two AKS configurations located in `src/infra/config`, namely ***full*** and ***reduced***. The primary AKS cluster uses the ***full*** configuration by default and the secondary one defaults to the ***reduced*** configuration.
+To change this you can specify the `--primary-aks-capacity` and `--secondary-aks-capacity` arguments.
+
+The routing strategy can be specified using the `--cross-regional-routing` argument. The allowed values are ***active-active*** and ***active-passive*** and this determines wether the traffic is distributed evenly between regions (active-active) or if the primary one has priority over the secondary one (active-passive). The default configuration is ***active-passive***.
+### Switchover
+
 Start the Switchover procedure that migrates the services to the secondary region:
 `./2-switchover.sh -rg=rg-name --from=primary-region --to=secondary-region`
 
 Find more info abuot the switchover in the [switchover document](./SWITCHOVER.md).
 
 The app saves the resource group where everything was deployed in a .env file which will be cleand-up at the end.
+
+### Cleanup
 
 To clean up the deployed resources:
 

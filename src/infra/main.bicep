@@ -79,10 +79,8 @@ module computeStacks './compute/computeStack.bicep' = [
       workspaceId: monitoringStacks[idx].outputs.workspaceId
       aksConfig: aksConfig[idx]
       appGatewaySubnetId: networkStacks[idx].outputs.appGatewaySubnetId
-      vnetId: networkStacks[idx].outputs.vnetId
       vnetName: networkStacks[idx].outputs.vnetName
       aksSubnetId: networkStacks[idx].outputs.aksSubnetId
-      infraSubnetId: networkStacks[idx].outputs.infraSubnetId
     }
     dependsOn: [
       networkStacks[idx]

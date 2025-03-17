@@ -7,12 +7,6 @@ param location string
 ''')
 param resourceSuffixUID string
 
-@description('The resource ID of the VNET where the ACR is connected to.')
-param vnetId string
-
-@description('The resource ID of the subnet where the ACR is connected to.')
-param infraSubnetId string
-
 @description('The resource ID of the Log Analytics workspace to which the ACR is connected to.')
 param workspaceId string
 

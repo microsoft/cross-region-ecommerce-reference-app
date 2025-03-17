@@ -13,17 +13,11 @@ param serviceLocation string
 @description('The resource ID of the Log Analytics workspace to which the AKS cluster is connected to.')
 param workspaceId string
 
-@description('The VNet id.')
-param vnetId string
-
 @description('The VNet name.')
 param vnetName string
 
 @description('The AKS subnet ID.')
 param aksSubnetId string
-
-@description('The infra subnet ID.')
-param infraSubnetId string
 
 @description('The appGateway subnet ID.')
 param appGatewaySubnetId string
@@ -73,15 +67,12 @@ module acr './acr.bicep' = {
   params: {
     location: serviceLocation
     resourceSuffixUID: resourceSuffixUID
-    vnetId: vnetId
-    infraSubnetId: infraSubnetId
     workspaceId: workspaceId
   }
 }
 
 module rbacGrantToSharedAcr './rbacGrantToSharedAcr.bicep' = {
   name: 'rbacGrantToSharedAcr-${serviceLocation}'
-  // scope: resourceGroup(acr.outputs.resourceGroupName)
   params: {
     containerRegistryName: acr.outputs.containerRegistryName
     kubeletIdentityObjectId: aks.outputs.kubeletIdentityObjectId

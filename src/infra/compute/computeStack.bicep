@@ -22,6 +22,9 @@ param aksSubnetId string
 @description('The appGateway subnet ID.')
 param appGatewaySubnetId string
 
+@description('The ACR name.')
+param containerRegistryName string
+
 module appGateway './appGateway.bicep' = {
   name: 'appGateway-${serviceLocation}'
   params: {
@@ -62,19 +65,10 @@ module aks './aks.bicep' = {
   }
 }
 
-module acr './acr.bicep' = {
-  name: 'acr'
-  params: {
-    location: serviceLocation
-    resourceSuffixUID: resourceSuffixUID
-    workspaceId: workspaceId
-  }
-}
-
 module rbacGrantToSharedAcr './rbacGrantToSharedAcr.bicep' = {
   name: 'rbacGrantToSharedAcr-${serviceLocation}'
   params: {
-    containerRegistryName: acr.outputs.containerRegistryName
+    containerRegistryName: containerRegistryName
     kubeletIdentityObjectId: aks.outputs.kubeletIdentityObjectId
   }
 }

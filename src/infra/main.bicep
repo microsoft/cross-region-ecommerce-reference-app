@@ -67,6 +67,19 @@ module networkPeerings './network/networkPeerings.bicep' = if (isGeoReplicated) 
   }
 }
 
+module acr './storage/acr.bicep' = {
+  name: 'acr'
+  params: {
+    location: serviceLocation
+    replicaLocation: secondaryServiceLocation
+    resourceSuffixUID: resourceSuffixUID
+    workspaceId: monitoringStacks[0].outputs.workspaceId
+  }
+  dependsOn: [
+    monitoringStacks[0]
+  ]
+}
+
 
 // The compute stack containing the AKS cluster and other compute resources
 module computeStacks './compute/computeStack.bicep' = [
@@ -81,6 +94,7 @@ module computeStacks './compute/computeStack.bicep' = [
       appGatewaySubnetId: networkStacks[idx].outputs.appGatewaySubnetId
       vnetName: networkStacks[idx].outputs.vnetName
       aksSubnetId: networkStacks[idx].outputs.aksSubnetId
+      containerRegistryName: acr.outputs.containerRegistryName
     }
     dependsOn: [
       networkStacks[idx]

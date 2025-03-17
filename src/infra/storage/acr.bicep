@@ -1,6 +1,9 @@
 @description('The region where the ACR is deployed in.')
 param location string
 
+@description('The location of the ACR replica.')
+param replicaLocation string
+
 @description('''
   The suffix of the unique identifier for the resources of the current deployment.
   Used to avoid name collisions and to link resources part of the same deployment together.
@@ -39,6 +42,12 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2021-09-01' =
     publicNetworkAccess: 'Enabled'
     zoneRedundancy: 'Enabled'
   }
+}
+
+resource acrReplica 'Microsoft.ContainerRegistry/registries/replications@2024-11-01-preview' = if (!empty(replicaLocation)) {
+  parent: containerRegistry
+  name: replicaLocation
+  location: replicaLocation
 }
 
 resource diagnosticLogs 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
